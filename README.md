@@ -1,6 +1,10 @@
 # Regular Length Expression (RLE)
 
-Add description here...
+This application maps a string to a string as such:
+
+```
+"AABBCCDDDE" => "2A2B2C3D1E"
+```
 
 ## Getting Started
 
@@ -40,13 +44,15 @@ pip3 install -r requirements.txt
 
 ## Running the tests
 
-We are using [pytest](https://docs.pytest.org/en/2.9.1/getting-started.html) for test writing. Run this snippet in a terminal window to run the tests - you need to be in the root `./jira-api`.
+Snippets below need to be executed in the root of the Flask application, e.g. `./functional_text_parser/app`.
+
+We are using [pytest](https://docs.pytest.org/en/2.9.1/getting-started.html) for testing. To run tests verbosely use:
 
 ```
 pytest -vv
 ```
 
-You can also run the test suite with a coverage report. Although it may not be possible to achieve 100% coverage - nor does 100% coverage ensure a well written test suite - it is still a useful heuristic in assessing overall application health.
+We are using [pytest-cov](https://pytest-cov.readthedocs.io/en/latest/) for test coverage reporting. To run tests and generate an HTML formatted report use:
 
 ```
 pytest --cov-report html --cov functions --verbose
@@ -58,12 +64,37 @@ After running the coverage report, open the summary in your browser with the fol
 open htmlcov/index.html
 ```
 
+_Although it may not be possible to achieve 100% coverage - nor does 100% coverage ensure a well written test suite - it is still a useful heuristic in assessing the overall health of an application._
+
 ### Break down into end to end tests
 
-...
+Since `rle` is the main application method and it is composed of all other methods in the application to achieve 100% test coverage we would only need to write tests for it.
 
 ```
-test_get_task() # authenticates and gets task status
+def test_rle():
+    assert rle('A') == '1A'
+    assert rle('AA') == '2A'
+    assert rle('AAAB') == '3A1B'
+    assert rle('AAABB55') == '3A2B25'
+```
+
+However, for documentation and future test-driven development purposes tests were also written for each method composing `rle`, for example:
+
+```
+string = 'AABBCDDDE'
+
+
+def test_listify_string():
+    l = listify_string(string)
+
+    assert l == ['A', 'A', 'B', 'B', 'C', 'D', 'D', 'D', 'E']
+
+
+def test_get_pairs():
+    pairs = get_pairs(listify_string(string))
+
+    assert pairs == [('A', 'A'), ('A', 'B'), ('B', 'B'), ('B', 'C'),
+                     ('C', 'D'), ('D', 'D'), ('D', 'D'), ('D', 'E')]
 ```
 
 ### And coding style tests
