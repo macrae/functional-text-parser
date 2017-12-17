@@ -107,15 +107,52 @@ test_pep8(self)
 
 ## Using the Project
 
-etc...
+You can run the Flask app locally by setting the `FLASK_APP` flag and running the service:
+
+```
+export FLASK_APP=app.py
+
+flask run
+```
+
+Then calling the service with:
+
+```
+curl -i http://localhost:5000/encode/api/v1.0/AABBCCDDDDD
+```
+
+The application has also been deployed on Heroku (using their free product, so give it a minute to spin up if invoking it for the first time in awhile), so it can also be called with:
+
+```
+curl -i https://macrae-text-parser.herokuapp.com//encode/api/v1.0/AABBCCDDDDD
+```
+
+Either of the service requests should produce a response like:
+
+```
+encode/api/v1.0/AABBCCDDDDD
+HTTP/1.1 200 OK
+Connection: keep-alive
+Server: gunicorn/19.7.1
+Date: Sun, 17 Dec 2017 16:26:29 GMT
+Content-Type: application/json
+Content-Length: 27
+Via: 1.1 vegur
+
+{
+  "encode": "2A2B2C5D"
+}
+```
 
 ## Built With
 
 * [Python3 venv](https://docs.python.org/3/library/venv.html) - Dependency Management
+* [Flask](http://flask.pocoo.org/) - Web Application Service
+* [Heroku](https://devcenter.heroku.com/) - Cloud Application Service
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://google.com) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/macrae/functional-text-parser/graphs/contributors) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
@@ -123,9 +160,9 @@ Describe how we version here.
 
 ## Authors
 
-* **Sean MacRae** - *Initial work* - [smacrae](https://google.com)
+* **Sean MacRae** - *Initial work* - [smacrae](https://github.com/macrae)
 
-See also the list of [contributors](https://google.com) who participated in this project.
+See also the list of [contributors](https://github.com/macrae/functional-text-parser/graphs/contributors) who participated in this project.
 
 ## License
 
