@@ -1,7 +1,7 @@
 attrs==17.3.0
 click==6.7
 coverage==4.4.2
-Flask==0.12.2
+Flask==1.0
 Flask-HTTPAuth==3.2.3
 fn==0.4.3
 gunicorn==19.7.1
