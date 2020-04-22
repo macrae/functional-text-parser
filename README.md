@@ -16,23 +16,10 @@ Python3 is required to run this application. The list of third-party dependencie
 
 ### Installing
 
-Create a Python3 virtual environment.
+Create a and activate a Python3.6 virtual environment.
 
 ```
 python3 -m venv .venv
-```
-
-If you get an error saying "returned non-zero exit status 1",
-make sure you have Python3 and pip3 upgraded to the current version and
-if that doesn't work, re-run the above command as:
-
-```
-python3 -m venv --without-pip .venv
-```
-
-Activate the virtual environemnt
-
-```
 source .venv/bin/activate
 ```
 
@@ -40,6 +27,7 @@ Install the third-party dependencies.
 
 ```
 pip3 install -r requirements.txt
+pip3 install -r requirements-dev.txt
 ```
 
 ## Running the tests
@@ -49,7 +37,7 @@ Snippets below need to be executed in the root of the Flask application, e.g. `.
 We are using [pytest](https://docs.pytest.org/en/2.9.1/getting-started.html) for testing. To run tests verbosely use:
 
 ```
-pytest -vv
+python3 -m pytest -vv
 ```
 
 We are using [pytest-cov](https://pytest-cov.readthedocs.io/en/latest/) for test coverage reporting. To run tests and generate an HTML formatted report use:
@@ -61,7 +49,7 @@ pytest --cov-report html --cov functions --verbose
 After running the coverage report, open the summary in your browser with the following.
 
 ```
-open htmlcov/index.html
+open cov_html/index.html
 ```
 
 _Although it may not be possible to achieve 100% coverage - nor does 100% coverage ensure a well written test suite - it is still a useful heuristic in assessing the overall health of an application._
@@ -97,22 +85,13 @@ def test_get_pairs():
                      ('C', 'D'), ('D', 'D'), ('D', 'D'), ('D', 'E')]
 ```
 
-### And coding style tests
-
-Check for PEP8 style guide adherence.
-
-```
-test_pep8(self)
-```
-
 ## Using the Project
 
-You can run the Flask app locally by setting the `FLASK_APP` flag and running the service:
+You can build and run the Docker container and host the Flask app locally with:
 
 ```
-export FLASK_APP=app.py
-
-flask run
+docker build -t python:text_parser . -f Dockerfile
+docker run -d -p 5000:5000 python:text_parser
 ```
 
 Then calling the service with:
@@ -121,23 +100,14 @@ Then calling the service with:
 curl -i http://localhost:5000/encode/api/v1.0/AABBCCDDDDD
 ```
 
-The application has also been deployed on Heroku (using their free product, so give it a minute to spin up if invoking it for the first time in awhile), so it can also be called with:
+The response will be:
 
 ```
-curl -i https://macrae-text-parser.herokuapp.com//encode/api/v1.0/AABBCCDDDDD
-```
-
-Either of the service requests should produce a response like:
-
-```
-encode/api/v1.0/AABBCCDDDDD
-HTTP/1.1 200 OK
-Connection: keep-alive
-Server: gunicorn/19.7.1
-Date: Sun, 17 Dec 2017 16:26:29 GMT
+HTTP/1.0 200 OK
 Content-Type: application/json
 Content-Length: 27
-Via: 1.1 vegur
+Server: Werkzeug/0.13 Python/3.6.9
+Date: Wed, 22 Apr 2020 20:46:54 GMT
 
 {
   "encode": "2A2B2C5D"
@@ -146,9 +116,9 @@ Via: 1.1 vegur
 
 ## Built With
 
-* [Python3 venv](https://docs.python.org/3/library/venv.html) - Dependency Management
+* [Python3](https://docs.python.org/3/library/venv.html) - Dependency Management
 * [Flask](http://flask.pocoo.org/) - Web Application Service
-* [Heroku](https://devcenter.heroku.com/) - Cloud Application Service
+* [Docker](https://devcenter.heroku.com/) - Cloud Application Service
 
 ## Contributing
 
@@ -167,7 +137,3 @@ See also the list of [contributors](https://github.com/macrae/functional-text-pa
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](https://google.com) file for details
-
-## Acknowledgments
-
-Tip of the hat to [a person](https://google.com) for...
