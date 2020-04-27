@@ -58,7 +58,6 @@ docs/_build/
 # PyBuilder
 target/
 
-*.yml
 *.DS_Store
 .vscode/
 .mypy_cache/
