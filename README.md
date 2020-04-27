@@ -1,3 +1,6 @@
+![pytest](https://github.com/macrae/functional-text-parser/workflows/pytest/badge.svg)
+![Publish Docker](https://github.com/macrae/functional-text-parser/workflows/Publish%20Docker/badge.svg)
+
 # Regular Length Expression (RLE)
 
 This application maps a string to a string as such:
