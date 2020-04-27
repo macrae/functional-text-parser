@@ -1,15 +1,14 @@
 attrs==17.3.0
 click==6.7
 coverage==4.4.2
-Flask==0.12.2
+flask>=1.0.0
 Flask-HTTPAuth==3.2.3
 fn==0.4.3
 gunicorn==19.7.1
 itsdangerous==0.24
-Jinja2==2.10
-# MarkupSafe==1.0
+Jinja2>=2.10.1
 numpy==1.13.3
 pluggy==0.6.0
 py==1.5.2
 six==1.11.0
-Werkzeug==0.13
+werkzeug>=0.15.3
