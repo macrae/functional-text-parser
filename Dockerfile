@@ -1,10 +1,10 @@
-FROM ubuntu:latest
+FROM python:3.6.10-slim-stretch
 
 LABEL maintainer="Sean MacRae <s.mac925@gmail.com>"
 
-RUN apt-get update -y
-
-RUN apt-get install -y python3-pip python3-dev build-essential
+RUN apt-get update -y \
+  && apt-get install -y python3-pip python3-dev build-essential \
+  && pip3 install --upgrade pip
 
 COPY requirements.txt /app/
 
