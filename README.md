@@ -119,9 +119,9 @@ Date: Wed, 22 Apr 2020 20:46:54 GMT
 
 ## Built With
 
-* [Python3](https://docs.python.org/3/library/venv.html) - Dependency Management
-* [Flask](http://flask.pocoo.org/) - Web Application Service
-* [Docker](https://devcenter.heroku.com/) - Cloud Application Service
+* [Python3](https://docs.python.org/3/library/venv.html)
+* [Flask](http://flask.pocoo.org/)
+* [Docker](https://hub.docker.com/)
 
 ## Contributing
 
